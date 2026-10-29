@@ -142,15 +142,23 @@
 
         .brand-mark {
             display: grid;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
             place-items: center;
-            border: 1px solid #b38aff70;
-            background: #b38aff0b;
-            color: var(--purple);
-            font-size: 19px;
-            font-weight: 800;
-            clip-path: polygon(0 0, 76% 0, 100% 24%, 100% 100%, 24% 100%, 0 76%);
+            overflow: hidden;
+            border: 1px solid #b38aff80;
+            border-radius: 50%;
+            background: #15111f;
+            box-shadow: inset 0 0 18px #b38aff0c;
+        }
+
+        .brand-mark img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: contain;
         }
 
         .brand-name {
@@ -299,14 +307,6 @@
             height: 17px;
         }
 
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            margin-top: 42px;
-            padding-top: 22px;
-            border-top: 1px solid var(--border);
-        }
 
         .meta-item {
             display: flex;
@@ -324,15 +324,6 @@
             box-shadow: 0 0 10px #72dfa744;
         }
 
-        /* Hero technical visual */
-
-        .hero-visual {
-            position: relative;
-            display: grid;
-            min-height: 380px;
-            place-items: center;
-            isolation: isolate;
-        }
 
         .visual-grid {
             position: absolute;
@@ -405,6 +396,11 @@
             font-family: "DM Sans", sans-serif;
             font-size: 10px;
             letter-spacing: .7px;
+        }
+
+        .creator-birth {
+            margin: -15px 0 22px;
+            font-size: 12px;
         }
 
         .visual-label strong {
@@ -612,6 +608,92 @@
 
         .detail-row span:last-child {
             text-align: end;
+        }
+
+        /* Interactive digital core */
+        .hero-visual.interactive-visual {
+            position: relative;
+            display: grid;
+            min-height: 430px;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background:
+                radial-gradient(circle at 50% 50%, #b38aff0b, transparent 65%),
+                #0d0b13;
+            isolation: isolate;
+        }
+
+        .interactive-visual::before,
+        .interactive-visual::after {
+            position: absolute;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+            border-color: var(--cyan);
+            border-style: solid;
+            content: "";
+            pointer-events: none;
+        }
+
+        .interactive-visual::before {
+            top: 14px;
+            inset-inline-start: 14px;
+            border-width: 1px 0 0 1px;
+        }
+
+        .interactive-visual::after {
+            right: 14px;
+            bottom: 14px;
+            border-width: 0 1px 1px 0;
+        }
+
+        .interactive-visual .visual-grid {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                linear-gradient(#b38aff0c 1px, transparent 1px),
+                linear-gradient(90deg, #b38aff0c 1px, transparent 1px);
+            background-size: 26px 26px;
+            mask-image: radial-gradient(ellipse, #000 15%, transparent 82%);
+        }
+
+        #reactive-core {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 430px;
+        }
+
+        .core-coordinate,
+        .core-index {
+            position: absolute;
+            z-index: 2;
+            color: var(--muted);
+            font-family: "DM Sans", sans-serif;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            pointer-events: none;
+        }
+
+        .core-coordinate {
+            top: 25px;
+            inset-inline-start: 28px;
+        }
+
+        .core-index {
+            right: 25px;
+            bottom: 24px;
+            color: var(--purple);
+        }
+
+        @media (max-width: 680px) {
+
+            .hero-visual.interactive-visual,
+            #reactive-core {
+                min-height: 320px;
+            }
         }
 
         /* Creator */
@@ -927,15 +1009,6 @@
                 font-size: 13px;
             }
 
-            .hero-meta {
-                gap: 15px;
-                margin-top: 30px;
-            }
-
-            .hero-visual {
-                min-height: 310px;
-            }
-
             .visual-frame {
                 width: min(245px, 70%);
             }
@@ -1018,10 +1091,38 @@
                 transition-duration: .01ms !important;
             }
         }
+
+        /* Animated starfield */
+        #starfield {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: .8;
+        }
+
+        body {
+            position: relative;
+            isolation: isolate;
+            background:
+                radial-gradient(ellipse at 50% 0%, #21162f 0%, transparent 48%),
+                var(--bg);
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .site-header {
+            border-radius: 0;
+        }
     </style>
 </head>
 
 <body>
+    <canvas id="starfield" aria-hidden="true"></canvas>
     <!-- SVG icon definitions -->
     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
         style="position:absolute;width:0;height:0;overflow:hidden">
@@ -1066,7 +1167,9 @@
     <div class="container">
         <header class="site-header">
             <a class="brand" href="#home" aria-label="Derik Wand Studio">
-                <span class="brand-mark">D</span>
+                <span class="brand-mark">
+                    <img src="#" alt="لوگوی Derik Wand Studio">
+                </span>
 
                 <span class="brand-name">
                     Derik Wand Studio
@@ -1129,41 +1232,15 @@
                             <span data-t="meetCreator">آشنایی با سازنده</span>
                         </a>
                     </div>
-
-                    <div class="hero-meta">
-                        <div class="meta-item">
-                            <span class="status-dot" aria-hidden="true"></span>
-                            <span data-t="independent">استودیوی مستقل</span>
-                        </div>
-
-                        <div class="meta-item">
-                            <svg aria-hidden="true">
-                                <use href="#icon-code" />
-                            </svg>
-                            <span data-t="gameAndWeb">بازی‌سازی و توسعهٔ وب</span>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="hero-visual" aria-label="DWS visual identity">
-                    <div class="visual-grid"></div>
-                    <span class="visual-coordinate">DWS / 001</span>
+                <div class="hero-visual interactive-visual">
+                    <div class="visual-grid" aria-hidden="true"></div>
 
-                    <div class="visual-frame">
-                        <span class="visual-logo">D</span>
-                    </div>
+                    <canvas id="reactive-core" role="img" aria-label="گوی دیجیتال تعاملی با ذرات متحرک"></canvas>
 
-                    <div class="visual-label visual-label-top">
-                        STUDIO STATUS
-                        <strong data-t="statusValue">Independent</strong>
-                    </div>
-
-                    <div class="visual-label visual-label-bottom">
-                        CORE / 01
-                        <strong>DESIGN + CODE</strong>
-                    </div>
-
-                    <span class="visual-index">DW—2026</span>
+                    <span class="core-coordinate" aria-hidden="true">DWS / INTERACTIVE</span>
+                    <span class="core-index" aria-hidden="true">CORE_001</span>
                 </div>
             </section>
 
@@ -1407,8 +1484,7 @@
                     <div class="creator-visual">
                         <span class="creator-index">PROFILE / 001</span>
 
-                        <!-- آدرس عکس خودت را به‌جای # قرار بده -->
-                        <img class="creator-photo" src="#" alt="تصویر سازندهٔ Derik Wand Studio">
+                        <img class="creator-photo" src="parham.webp" alt="تصویر سازندهٔ Derik Wand Studio">
 
                         <span class="creator-tag">DWS / DEVELOPER</span>
                     </div>
@@ -1420,6 +1496,10 @@
 
                         <p class="creator-role" data-t="creatorRole">
                             برنامه‌نویس و توسعه‌دهندهٔ بازی
+                        </p>
+
+                        <p class="creator-birth muted" data-t="creatorBirth">
+                            متولد ۱۳۸۹
                         </p>
 
                         <p data-t="creatorDescription">
@@ -1480,6 +1560,7 @@
                 navProjects: "پروژه‌ها",
                 navStudio: "استودیو",
                 navCreator: "سازنده",
+                creatorBirth: "متولد ۱۳۸۹",
 
                 heroEyebrow: "استودیوی مستقل توسعه",
                 heroLine1: "ایده‌ها را",
@@ -1562,6 +1643,7 @@
                 navProjects: "Projects",
                 navStudio: "Studio",
                 navCreator: "Creator",
+                creatorBirth: "Born in 2010",
 
                 heroEyebrow: "INDEPENDENT DEVELOPMENT STUDIO",
                 heroLine1: "Turn ideas",
@@ -1751,6 +1833,319 @@
             new Date().getFullYear();
 
         setLanguage("fa");
+
+        // Animated starfield
+        (() => {
+            const canvas = document.getElementById("starfield");
+            const ctx = canvas.getContext("2d");
+
+            if (!ctx) return;
+
+            const reduceMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+            let width = 0;
+            let height = 0;
+            let stars = [];
+            let animationFrame;
+
+            const pointer = { x: -1000, y: -1000 };
+
+            function resize() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                width = window.innerWidth;
+                height = window.innerHeight;
+
+                canvas.width = Math.round(width * dpr);
+                canvas.height = Math.round(height * dpr);
+
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                const count = Math.min(
+                    180,
+                    Math.max(65, Math.floor((width * height) / 9500))
+                );
+
+                stars = Array.from({ length: count }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.35 + .25,
+                    alpha: Math.random() * .55 + .15,
+                    phase: Math.random() * Math.PI * 2,
+                    speed: Math.random() * .012 + .003,
+                    drift: Math.random() * .12 + .025
+                }));
+            }
+
+            function draw(time = 0) {
+                ctx.clearRect(0, 0, width, height);
+
+                for (const star of stars) {
+                    const twinkle = reduceMotion.matches
+                        ? 1
+                        : .72 + Math.sin(time * star.speed + star.phase) * .28;
+
+                    const dx = star.x - pointer.x;
+                    const dy = star.y - pointer.y;
+                    const distance = Math.hypot(dx, dy);
+
+                    let x = star.x;
+                    let y = star.y;
+
+                    // A subtle reaction to the mouse
+                    if (distance < 115 && distance > 0) {
+                        const force = (115 - distance) / 115;
+                        x += (dx / distance) * force * 9;
+                        y += (dy / distance) * force * 9;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, star.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(207, 184, 255, ${star.alpha * twinkle})`;
+                    ctx.fill();
+
+                    if (!reduceMotion.matches) {
+                        star.y -= star.drift;
+
+                        if (star.y < -2) {
+                            star.y = height + 2;
+                            star.x = Math.random() * width;
+                        }
+                    }
+                }
+
+                if (!reduceMotion.matches) {
+                    animationFrame = requestAnimationFrame(draw);
+                }
+            }
+
+            window.addEventListener("resize", () => {
+                cancelAnimationFrame(animationFrame);
+                resize();
+                draw();
+            });
+
+            window.addEventListener("pointermove", event => {
+                pointer.x = event.clientX;
+                pointer.y = event.clientY;
+            }, { passive: true });
+
+            window.addEventListener("pointerleave", () => {
+                pointer.x = -1000;
+                pointer.y = -1000;
+            });
+
+            reduceMotion.addEventListener?.("change", () => {
+                cancelAnimationFrame(animationFrame);
+                draw();
+            });
+
+            resize();
+            draw();
+        })();
+        // Mouse-reactive particle core
+        (() => {
+            const canvas = document.getElementById("reactive-core");
+            const container = canvas?.parentElement;
+            const ctx = canvas?.getContext("2d");
+
+            if (!canvas || !container || !ctx) return;
+
+            const reduceMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+            const pointer = { x: 0, y: 0, active: false };
+            const particles = [];
+            const particleCount = 210;
+
+            let width = 0;
+            let height = 0;
+            let frame = 0;
+            let rotation = 0;
+
+            function resize() {
+                const rect = container.getBoundingClientRect();
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                width = rect.width;
+                height = rect.height;
+
+                canvas.width = Math.round(width * dpr);
+                canvas.height = Math.round(height * dpr);
+                canvas.style.width = `${width}px`;
+                canvas.style.height = `${height}px`;
+
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                particles.length = 0;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = Math.sqrt(Math.random());
+
+                    particles.push({
+                        angle,
+                        radius,
+                        depth: Math.random() * 2 - 1,
+                        size: Math.random() * 1.8 + .4,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            function render(time = 0) {
+                ctx.clearRect(0, 0, width, height);
+
+                const cx = width / 2;
+                const cy = height / 2;
+                const radius = Math.min(width, height) * .34;
+
+                const targetRotation = pointer.active
+                    ? pointer.x * .65
+                    : 0;
+
+                if (!reduceMotion.matches) {
+                    rotation += (targetRotation - rotation) * .035;
+                }
+
+                // Outer technical rings
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(rotation * .2);
+
+                for (let i = 0; i < 3; i++) {
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        0, 0,
+                        radius * (1.08 + i * .13),
+                        radius * (.45 + i * .07),
+                        i * .55,
+                        0, Math.PI * 2
+                    );
+
+                    ctx.strokeStyle = i === 1
+                        ? "rgba(128,217,233,.3)"
+                        : "rgba(179,138,255,.2)";
+
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+
+                ctx.restore();
+
+                // Particle sphere
+                const projected = particles.map(particle => {
+                    const angle = particle.angle + rotation;
+                    const depth = Math.sqrt(
+                        Math.max(0, 1 - particle.radius * particle.radius)
+                    ) * particle.depth;
+
+                    const x = Math.cos(angle) * particle.radius;
+                    const y = Math.sin(angle) * particle.radius;
+
+                    const perspective = 1 + depth * .25;
+
+                    let px = cx + x * radius * perspective;
+                    let py = cy + y * radius * perspective;
+
+                    if (pointer.active) {
+                        const dx = px - (cx + pointer.x * radius);
+                        const dy = py - (cy + pointer.y * radius);
+                        const distance = Math.hypot(dx, dy);
+
+                        if (distance < 80 && distance > 0) {
+                            const force = (80 - distance) / 80;
+                            px += (dx / distance) * force * 8;
+                            py += (dy / distance) * force * 8;
+                        }
+                    }
+
+                    return {
+                        x: px,
+                        y: py,
+                        depth,
+                        size: particle.size,
+                        alpha: .3 + (depth + 1) * .3,
+                        phase: particle.phase
+                    };
+                });
+
+                // Connect nearby particles
+                for (let i = 0; i < projected.length; i++) {
+                    for (let j = i + 1; j < projected.length; j++) {
+                        const a = projected[i];
+                        const b = projected[j];
+
+                        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+
+                        if (distance < 27) {
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.strokeStyle =
+                                `rgba(179,138,255,${(1 - distance / 27) * .22})`;
+                            ctx.lineWidth = .7;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                for (const p of projected) {
+                    const twinkle = reduceMotion.matches
+                        ? 1
+                        : .7 + Math.sin(time * .0015 + p.phase) * .3;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.depth > 0
+                        ? `rgba(128,217,233,${p.alpha * twinkle})`
+                        : `rgba(179,138,255,${p.alpha * twinkle})`;
+                    ctx.fill();
+                }
+
+                // Center point
+                ctx.beginPath();
+                ctx.arc(cx, cy, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = "#80d9e9";
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = "#80d9e9";
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                if (!reduceMotion.matches) {
+                    frame = requestAnimationFrame(render);
+                }
+            }
+
+            container.addEventListener("pointermove", event => {
+                const rect = container.getBoundingClientRect();
+
+                pointer.x = (event.clientX - rect.left - rect.width / 2)
+                    / (rect.width / 2);
+
+                pointer.y = (event.clientY - rect.top - rect.height / 2)
+                    / (rect.height / 2);
+
+                pointer.active = true;
+            });
+
+            container.addEventListener("pointerleave", () => {
+                pointer.active = false;
+            });
+
+            window.addEventListener("resize", resize);
+
+            reduceMotion.addEventListener?.("change", () => {
+                cancelAnimationFrame(frame);
+                render();
+            });
+
+            resize();
+            render();
+        })();
     </script>
 </body>
 
