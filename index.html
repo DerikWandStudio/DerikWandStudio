@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0a10">
+  <meta name="description" content="Derik Wand Studio — توسعه بازی، طراحی وب و ساخت تجربه‌های دیجیتال.">
+
+  <title>Derik Wand Studio | DWS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+
+      --bg: #0b0a10;
+      --surface: #12111a;
+      --surface-hover: #191722;
+      --text: #f0edf7;
+      --muted: #a5a0b3;
+      --purple: #b38aff;
+      --cyan: #80d9e9;
+      --border: #ffffff14;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Vazirmatn", sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body[dir="ltr"] {
+      font-family: "DM Sans", "Vazirmatn", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      color: inherit;
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    article:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 5px;
+    }
+
+    svg {
+      display: block;
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 64px));
+      margin-inline: auto;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin-top: 12px;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      background: rgb(15 13 22 / 92%);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      gap: 12px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid #b38aff70;
+      background: #b38aff0b;
+      color: var(--purple);
+      font-size: 19px;
+      font-weight: 800;
+      clip-path: polygon(0 0, 76% 0, 100% 24%, 100% 100%, 24% 100%, 0 76%);
+    }
+
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.4;
+    }
+
+    .brand-name small {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(18px, 3vw, 38px);
+    }
+
+    .site-nav a {
+      color: var(--muted);
+      font-size: 12px;
+      transition: color .2s;
+    }
+
+    .site-nav a:hover {
+      color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-button {
+      display: inline-flex;
+      min-width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+
+    .icon-button:hover {
+      border-color: #b38aff80;
+      background: #b38aff0c;
+    }
+
+    .language-label {
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    #menuBtn {
+      display: none;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+      align-items: center;
+      gap: clamp(45px, 8vw, 110px);
+      min-height: 620px;
+      padding-block: 95px 110px;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+    }
+
+    .hero h1 {
+      margin: 25px 0 22px;
+      font-size: clamp(42px, 5.5vw, 72px);
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      display: block;
+    }
+
+    .hero h1 .accent {
+      color: var(--purple);
+    }
+
+    .hero-description {
+      max-width: 490px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2.2;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 47px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 19px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: #b38aff80;
+    }
+
+    .button-primary {
+      border-color: var(--purple);
+      background: var(--purple);
+      color: #171020;
+    }
+
+    .button-primary:hover {
+      background: #c4a5ff;
+    }
+
+    .button svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 42px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      background: #72dfa7;
+      box-shadow: 0 0 10px #72dfa744;
+    }
+
+    /* Hero technical visual */
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      min-height: 380px;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .visual-grid {
+      position: absolute;
+      inset: 5%;
+      z-index: -1;
+      background-image:
+        linear-gradient(#b38aff0c 1px, transparent 1px),
+        linear-gradient(90deg, #b38aff0c 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse, #000 10%, transparent 72%);
+    }
+
+    .visual-frame {
+      position: relative;
+      display: grid;
+      width: min(300px, 78%);
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid #b38aff50;
+      background:
+        linear-gradient(135deg, #b38aff0d, transparent 55%),
+        #100e17;
+      clip-path: polygon(
+        0 0,
+        78% 0,
+        100% 22%,
+        100% 100%,
+        22% 100%,
+        0 78%
+      );
+    }
+
+    .visual-frame::before {
+      position: absolute;
+      inset: 13px;
+      border: 1px solid #80d9e922;
+      content: "";
+      clip-path: polygon(
+        0 0,
+        78% 0,
+        100% 22%,
+        100% 100%,
+        22% 100%,
+        0 78%
+      );
+    }
+
+    .visual-logo {
+      position: relative;
+      color: var(--purple);
+      font-family: "DM Sans", sans-serif;
+      font-size: 125px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 0 65px #b38aff25;
+    }
+
+    .visual-logo::after {
+      position: absolute;
+      right: -12px;
+      bottom: 5px;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--cyan);
+      content: "";
+    }
+
+    .visual-label {
+      position: absolute;
+      padding: 10px 13px;
+      border: 1px solid var(--border);
+      background: #100e17;
+      color: var(--muted);
+      font-family: "DM Sans", sans-serif;
+      font-size: 10px;
+      letter-spacing: .7px;
+    }
+
+    .visual-label strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .visual-label-top {
+      top: 10%;
+      inset-inline-end: 0;
+    }
+
+    .visual-label-bottom {
+      bottom: 8%;
+      inset-inline-start: 0;
+    }
+
+    .visual-coordinate {
+      position: absolute;
+      top: 7%;
+      inset-inline-start: 3%;
+      color: #a5a0b360;
+      font-family: "DM Sans", sans-serif;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .visual-index {
+      position: absolute;
+      bottom: 4%;
+      inset-inline-end: 4%;
+      color: var(--purple);
+      font-family: "DM Sans", sans-serif;
+      font-size: 10px;
+    }
+
+    /* Sections */
+
+    .content-section {
+      padding-block: 90px;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 95px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, .75fr) minmax(250px, 1fr);
+      align-items: end;
+      gap: 35px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      margin: 12px 0 0;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: -.8px;
+    }
+
+    .section-heading p {
+      max-width: 460px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.1;
+    }
+
+    /* Project cards */
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      position: relative;
+      display: flex;
+      min-height: 270px;
+      flex-direction: column;
+      padding: 25px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      transition: border-color .25s, background .25s, transform .25s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: #b38aff70;
+      background: var(--surface-hover);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .card-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      border: 1px solid #b38aff35;
+      color: var(--purple);
+    }
+
+    .card-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .card-number {
+      color: #777184;
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+    }
+
+    .project-card h3 {
+      margin: 0 0 10px;
+      font-family: "DM Sans", "Vazirmatn", sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .project-card p {
+      margin: 0 0 25px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 17px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-family: "DM Sans", "Vazirmatn", sans-serif;
+      font-size: 10px;
+    }
+
+    .card-footer svg {
+      width: 17px;
+      height: 17px;
+      color: var(--cyan);
+      transition: transform .2s;
+    }
+
+    .project-card:hover .card-footer svg {
+      transform: translate(-3px, -3px);
+    }
+
+    /* About the studio */
+
+    .studio-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, .8fr);
+      gap: 80px;
+      align-items: start;
+    }
+
+    .studio-copy h2 {
+      margin: 14px 0 22px;
+      font-size: clamp(28px, 3vw, 39px);
+      line-height: 1.6;
+    }
+
+    .studio-copy p {
+      max-width: 610px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.3;
+    }
+
+    .studio-details {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-block: 15px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .detail-row span:first-child {
+      color: var(--muted);
+    }
+
+    .detail-row span:last-child {
+      text-align: end;
+    }
+
+    /* Creator */
+
+    .creator-layout {
+      display: grid;
+      grid-template-columns: minmax(240px, .78fr) minmax(0, 1.22fr);
+      align-items: center;
+      gap: clamp(40px, 8vw, 105px);
+    }
+
+    .creator-visual {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(145deg, #b38aff0c, transparent 55%),
+        #100e17;
+      overflow: hidden;
+    }
+
+    .creator-visual::before {
+      position: absolute;
+      inset: 15px;
+      border: 1px solid #b38aff30;
+      content: "";
+      pointer-events: none;
+      clip-path: polygon(
+        0 0,
+        78% 0,
+        100% 22%,
+        100% 100%,
+        22% 100%,
+        0 78%
+      );
+    }
+
+    .creator-visual::after {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(#b38aff0a 1px, transparent 1px),
+        linear-gradient(90deg, #b38aff0a 1px, transparent 1px);
+      background-size: 25px 25px;
+      content: "";
+      pointer-events: none;
+      mask-image: linear-gradient(135deg, #000, transparent 80%);
+    }
+
+    .creator-photo {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 72%;
+      height: 290px;
+      object-fit: cover;
+      border: 1px solid #80d9e950;
+      background: #171521;
+      clip-path: polygon(
+        0 0,
+        84% 0,
+        100% 16%,
+        100% 100%,
+        16% 100%,
+        0 84%
+      );
+    }
+
+    .creator-tag {
+      position: absolute;
+      z-index: 2;
+      bottom: 30px;
+      inset-inline-start: 20px;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      background: #100e17;
+      color: var(--cyan);
+      font-family: "DM Sans", sans-serif;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .creator-index {
+      position: absolute;
+      top: 28px;
+      inset-inline-end: 24px;
+      z-index: 2;
+      color: #a5a0b3;
+      font-family: "DM Sans", sans-serif;
+      font-size: 10px;
+    }
+
+    .creator-copy h2 {
+      margin: 13px 0 6px;
+      font-size: clamp(29px, 3.5vw, 43px);
+      line-height: 1.5;
+    }
+
+    .creator-role {
+      margin: 0 0 23px;
+      color: var(--cyan);
+      font-family: "DM Sans", "Vazirmatn", sans-serif;
+      font-size: 12px;
+    }
+
+    .creator-copy > p {
+      max-width: 580px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.3;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 24px;
+    }
+
+    .skill-tag {
+      padding: 6px 11px;
+      border: 1px solid var(--border);
+      color: #d0cadc;
+      font-family: "DM Sans", "Vazirmatn", sans-serif;
+      font-size: 10px;
+    }
+
+    .creator-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 27px;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      padding-block: 27px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-brand {
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+    }
+
+    .footer-credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .footer-credit a {
+      color: var(--purple);
+      transition: color .2s;
+    }
+
+    .footer-credit a:hover {
+      color: var(--cyan);
+    }
+
+    /* Notification */
+
+    .toast {
+      position: fixed;
+      z-index: 200;
+      right: 50%;
+      bottom: 25px;
+      width: max-content;
+      max-width: calc(100% - 32px);
+      padding: 13px 18px;
+      transform: translate(50%, 15px);
+      border: 1px solid #b38aff45;
+      background: #15121e;
+      color: var(--text);
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+    }
+
+    .toast.show {
+      transform: translate(50%, 0);
+      opacity: 1;
+    }
+
+    /* Responsive */
+
+    @media (min-width: 1500px) {
+      .hero {
+        min-height: 700px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        width: calc(100% - 44px);
+      }
+
+      .site-header {
+        gap: 15px;
+      }
+
+      .site-nav {
+        gap: 17px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, .8fr);
+        gap: 35px;
+        min-height: 540px;
+        padding-block: 75px 90px;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 5vw, 56px);
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .project-grid {
+        gap: 12px;
+      }
+
+      .project-card {
+        padding: 19px;
+      }
+
+      .studio-layout {
+        gap: 45px;
+      }
+
+      .creator-layout {
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: calc(100% - 36px);
+      }
+
+      .site-header {
+        top: 8px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+        padding: 10px;
+      }
+
+      .brand {
+        gap: 9px;
+        font-size: 13px;
+      }
+
+      .brand-mark {
+        width: 37px;
+        height: 37px;
+      }
+
+      .header-actions {
+        margin-inline-start: auto;
+      }
+
+      #menuBtn {
+        display: inline-flex;
+      }
+
+      .site-nav {
+        display: none;
+        order: 3;
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .site-nav.open {
+        display: flex;
+      }
+
+      .site-nav a {
+        padding: 12px 5px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .site-nav a:last-child {
+        border-bottom: 0;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        min-height: auto;
+        padding-block: 80px 70px;
+      }
+
+      .hero h1 {
+        margin-top: 22px;
+        font-size: clamp(42px, 10vw, 59px);
+        letter-spacing: -1.5px;
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .hero-meta {
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .hero-visual {
+        min-height: 310px;
+      }
+
+      .visual-frame {
+        width: min(245px, 70%);
+      }
+
+      .visual-logo {
+        font-size: 100px;
+      }
+
+      .content-section {
+        padding-block: 65px;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .section-heading h2 {
+        font-size: 31px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .project-card {
+        min-height: 235px;
+        padding: 22px;
+      }
+
+      .card-top {
+        margin-bottom: 23px;
+      }
+
+      .studio-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .studio-copy h2 {
+        font-size: 31px;
+      }
+
+      .creator-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .creator-visual {
+        min-height: 340px;
+      }
+
+      .creator-photo {
+        width: 68%;
+        height: 250px;
+      }
+
+      .creator-copy h2 {
+        font-size: 33px;
+      }
+
+      .site-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding-block: 23px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- SVG icon definitions -->
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+       style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path d="M7 17 17 7M7 7h10v10"/>
+    </symbol>
+
+    <symbol id="icon-code" viewBox="0 0 24 24">
+      <path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>
+    </symbol>
+
+    <symbol id="icon-game" viewBox="0 0 24 24">
+      <path d="M7 9h10a4 4 0 0 1 3.8 5.2l-1 3A2.5 2.5 0 0 1 16 18l-2.5-2h-3L8 18a2.5 2.5 0 0 1-3.8-.8l-1-3A4 4 0 0 1 7 9Z"/>
+      <path d="M7 12v4M5 14h4M15.5 12.5h.01M18 15h.01"/>
+    </symbol>
+
+    <symbol id="icon-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+    </symbol>
+
+    <symbol id="icon-layers" viewBox="0 0 24 24">
+      <path d="m12 3 9 5-9 5-9-5 9-5Z"/>
+      <path d="m3 12 9 5 9-5M3 16l9 5 9-5"/>
+    </symbol>
+
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </symbol>
+
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="m6 6 12 12M18 6 6 18"/>
+    </symbol>
+
+    <symbol id="icon-external" viewBox="0 0 24 24">
+      <path d="M14 4h6v6M20 4 11 13"/>
+      <path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/>
+    </symbol>
+  </svg>
+
+  <div class="container">
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Derik Wand Studio">
+        <span class="brand-mark">D</span>
+
+        <span class="brand-name">
+          Derik Wand Studio
+          <small>INDEPENDENT DEVELOPMENT</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" id="nav" aria-label="Main navigation">
+        <a href="#games" data-t="navGames">بازی‌ها</a>
+        <a href="#projects" data-t="navProjects">پروژه‌ها</a>
+        <a href="#studio" data-t="navStudio">استودیو</a>
+        <a href="#creator" data-t="navCreator">سازنده</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button" id="langBtn"
+                type="button" aria-label="Change language">
+          <span class="language-label">EN</span>
+          <svg aria-hidden="true"><use href="#icon-globe"/></svg>
+        </button>
+
+        <button class="icon-button" id="menuBtn"
+                type="button" aria-label="Open menu"
+                aria-expanded="false" aria-controls="nav">
+          <svg aria-hidden="true"><use href="#icon-menu"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="home">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow" data-t="heroEyebrow">
+            استودیوی مستقل توسعه
+          </span>
+
+          <h1>
+            <span data-t="heroLine1">ایده‌ها را</span>
+            <span class="accent" data-t="heroLine2">به واقعیت تبدیل کن.</span>
+          </h1>
+
+          <p class="hero-description" data-t="heroDescription">
+            Derik Wand Studio فضایی برای ساخت بازی‌ها، توسعهٔ وب
+            و تجربه‌های دیجیتال است؛ جایی که طراحی و برنامه‌نویسی
+            در کنار هم قرار می‌گیرند.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">
+              <span data-t="explore">مشاهدهٔ پروژه‌ها</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </a>
+
+            <a class="button" href="#creator">
+              <span data-t="meetCreator">آشنایی با سازنده</span>
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span data-t="independent">استودیوی مستقل</span>
+            </div>
+
+            <div class="meta-item">
+              <svg aria-hidden="true"><use href="#icon-code"/></svg>
+              <span data-t="gameAndWeb">بازی‌سازی و توسعهٔ وب</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="DWS visual identity">
+          <div class="visual-grid"></div>
+          <span class="visual-coordinate">DWS / 001</span>
+
+          <div class="visual-frame">
+            <span class="visual-logo">D</span>
+          </div>
+
+          <div class="visual-label visual-label-top">
+            STUDIO STATUS
+            <strong data-t="statusValue">Independent</strong>
+          </div>
+
+          <div class="visual-label visual-label-bottom">
+            CORE / 01
+            <strong>DESIGN + CODE</strong>
+          </div>
+
+          <span class="visual-index">DW—2026</span>
+        </div>
+      </section>
+
+      <!-- Games -->
+      <section class="content-section" id="games">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">GAME DEVELOPMENT</span>
+            <h2 data-t="gamesTitle">بازی‌ها</h2>
+          </div>
+
+          <p data-t="gamesIntro">
+            از ایده‌پردازی تا طراحی مکانیک‌ها و پیاده‌سازی؛
+            بازی‌ها بخش مهمی از مسیر توسعه در DWS هستند.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card" tabindex="0" data-project="flag">
+            <div class="card-top">
+              <span class="card-icon">
+                <svg aria-hidden="true"><use href="#icon-game"/></svg>
+              </span>
+              <span class="card-number">GAME / 001</span>
+            </div>
+
+            <h3>FLAG RUMBLE</h3>
+            <p data-t="flagDesc">
+              نبرد تیمی، جمع‌آوری منابع و ساخت‌وساز در یک میدان
+              رقابتی با سبک هنری Low-poly.
+            </p>
+
+            <div class="card-footer">
+              <span data-t="inDevelopment">در حال توسعه</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </div>
+          </article>
+
+          <article class="project-card" tabindex="0" data-project="kaka">
+            <div class="card-top">
+              <span class="card-icon">
+                <svg aria-hidden="true"><use href="#icon-code"/></svg>
+              </span>
+              <span class="card-number">GAME / 002</span>
+            </div>
+
+            <h3>KakaShooter</h3>
+            <p data-t="kakaDesc">
+              یکی از بازی‌های اکشن ساخته‌شده در مجموعهٔ آثار استودیو.
+            </p>
+
+            <div class="card-footer">
+              <span data-t="gameArchive">آرشیو بازی‌ها</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </div>
+          </article>
+
+          <article class="project-card" tabindex="0" data-project="otherGames">
+            <div class="card-top">
+              <span class="card-icon">
+                <svg aria-hidden="true"><use href="#icon-layers"/></svg>
+              </span>
+              <span class="card-number">GAME / 003</span>
+            </div>
+
+            <h3 data-t="otherGames">بازی‌های دیگر</h3>
+            <p data-t="otherGamesDesc">
+              ناقلا، انگور، BlastCastle و دیگر تجربه‌های بازی‌سازی.
+            </p>
+
+            <div class="card-footer">
+              <span data-t="moreWorks">دیگر آثار</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="content-section" id="projects">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">SELECTED WORK</span>
+            <h2 data-t="projectsTitle">پروژه‌ها</h2>
+          </div>
+
+          <p data-t="projectsIntro">
+            نمونه‌هایی از پروژه‌های وب و نرم‌افزاری که با تمرکز
+            بر کاربردپذیری، ساختار فنی و تجربهٔ کاربر توسعه یافته‌اند.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card" tabindex="0" data-project="royaye">
+            <div class="card-top">
+              <span class="card-icon">
+                <svg aria-hidden="true"><use href="#icon-globe"/></svg>
+              </span>
+              <span class="card-number">WEB / 001</span>
+            </div>
+
+            <h3>Royaye Aflak</h3>
+            <p data-t="royayeDesc">
+              وب‌سایت آکادمی فوتبال با بخش‌های محتوایی، گالری
+              و پنل مدیریت.
+            </p>
+
+            <div class="card-footer">
+              <span>WEB / PLATFORM</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </div>
+          </article>
+
+          <article class="project-card" tabindex="0" data-project="khosh">
+            <div class="card-top">
+              <span class="card-icon">
+                <svg aria-hidden="true"><use href="#icon-layers"/></svg>
+              </span>
+              <span class="card-number">WEB / 002</span>
+            </div>
+
+            <h3>KhoshNamay</h3>
+            <p data-t="khoshDesc">
+              پروژه‌ای برای ایجاد حضور حرفه‌ای و معرفی خدمات
+              در فضای آنلاین.
+            </p>
+
+            <div class="card-footer">
+              <span>WEB / BRAND</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </div>
+          </article>
+
+          <article class="project-card" tabindex="0" data-project="next">
+            <div class="card-top">
+              <span class="card-icon">
+                <svg aria-hidden="true"><use href="#icon-code"/></svg>
+              </span>
+              <span class="card-number">DWS / 003</span>
+            </div>
+
+            <h3 data-t="nextTitle">پروژهٔ بعدی</h3>
+            <p data-t="nextDesc">
+              ایده‌های تازه‌ای که در آینده به پروژه‌های قابل استفاده
+              تبدیل خواهند شد.
+            </p>
+
+            <div class="card-footer">
+              <span data-t="comingSoon">به‌زودی</span>
+              <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Studio -->
+      <section class="content-section" id="studio">
+        <div class="studio-layout">
+          <div class="studio-copy">
+            <span class="eyebrow">ABOUT THE STUDIO</span>
+
+            <h2 data-t="studioTitle">فناوری با نگاه خلاقانه.</h2>
+
+            <p data-t="studioDescription">
+              Derik Wand Studio یک استودیوی مستقل توسعه است که
+              بازی‌سازی، برنامه‌نویسی و طراحی وب را دنبال می‌کند.
+              هدف، ساخت محصولاتی است که علاوه بر ظاهر مناسب،
+              ساختار فنی قابل اتکا و کاربرد مشخصی داشته باشند.
+            </p>
+
+            <p data-t="studioDescription2">
+              از نمونه‌های اولیهٔ بازی تا وب‌سایت‌های واقعی،
+              هر پروژه فرصتی برای یادگیری، آزمایش و بهتر کردن
+              فرایند ساخت محصول است.
+            </p>
+          </div>
+
+          <div class="studio-details">
+            <div class="detail-row">
+              <span data-t="detailFocus">حوزهٔ فعالیت</span>
+              <span data-t="detailFocusValue">بازی و وب</span>
+            </div>
+
+            <div class="detail-row">
+              <span data-t="detailApproach">رویکرد</span>
+              <span data-t="detailApproachValue">طراحی و توسعه</span>
+            </div>
+
+            <div class="detail-row">
+              <span data-t="detailStructure">ساختار</span>
+              <span data-t="detailStructureValue">استودیوی مستقل</span>
+            </div>
+
+            <div class="detail-row">
+              <span data-t="detailTools">فناوری‌ها</span>
+              <span>Unity / C# / Web</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Creator -->
+      <section class="content-section" id="creator">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">THE DEVELOPER</span>
+            <h2 data-t="creatorSectionTitle">پشت این استودیو</h2>
+          </div>
+
+          <p data-t="creatorSectionIntro">
+            معرفی کوتاهی از فردی که ایده‌ها را به پروژه‌های
+            واقعی تبدیل می‌کند.
+          </p>
+        </div>
+
+        <div class="creator-layout">
+          <div class="creator-visual">
+            <span class="creator-index">PROFILE / 001</span>
+
+            <!-- آدرس عکس خودت را به‌جای # قرار بده -->
+            <img
+              class="creator-photo"
+              src="#"
+              alt="تصویر سازندهٔ Derik Wand Studio"
+            >
+
+            <span class="creator-tag">DWS / DEVELOPER</span>
+          </div>
+
+          <div class="creator-copy">
+            <span class="eyebrow" data-t="creatorEyebrow">CREATOR & DEVELOPER</span>
+
+            <h2 data-t="creatorName">پرهام دریکوند</h2>
+
+            <p class="creator-role" data-t="creatorRole">
+              برنامه‌نویس و توسعه‌دهندهٔ بازی
+            </p>
+
+            <p data-t="creatorDescription">
+              من پرهام دریکوند هستم؛ برنامه‌نویس و بازی‌ساز علاقه‌مند
+              به ساخت بازی‌های دوبعدی و سه‌بعدی و توسعهٔ وب.
+              Derik Wand Studio فضایی است برای تبدیل ایده‌ها به
+              پروژه‌های عملی، یادگیری فناوری‌های جدید و ساخت
+              تجربه‌های دیجیتال با هویت مستقل.
+            </p>
+
+            <div class="skill-list" aria-label="Skills">
+              <span class="skill-tag">Game Development</span>
+              <span class="skill-tag">Unity / C#</span>
+              <span class="skill-tag">Web Development</span>
+              <span class="skill-tag">2D / 3D Design</span>
+            </div>
+
+            <div class="creator-actions">
+              <a
+                class="button button-primary"
+                href="https://khoshnamay.ir/profiles/parham/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span data-t="creatorProfile">مشاهدهٔ پروفایل</span>
+                <svg aria-hidden="true"><use href="#icon-external"/></svg>
+              </a>
+
+              <a class="button" href="#projects">
+                <span data-t="viewWorks">دیدن پروژه‌ها</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span class="footer-brand">Derik Wand Studio</span>
+
+      <span data-t="footerText">
+        ساخته‌شده برای ایده‌هایی که ارزش اجرا دارند.
+      </span>
+
+      <span class="footer-credit">
+        <span>© <span id="year"></span></span>
+        <span>—</span>
+        <a
+          href="https://khoshnamay.ir/profiles/parham/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-t="footerCreator"
+        >پرهام دریکوند</a>
+      </span>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const translations = {
+      fa: {
+        navGames: "بازی‌ها",
+        navProjects: "پروژه‌ها",
+        navStudio: "استودیو",
+        navCreator: "سازنده",
+
+        heroEyebrow: "استودیوی مستقل توسعه",
+        heroLine1: "ایده‌ها را",
+        heroLine2: "به واقعیت تبدیل کن.",
+        heroDescription:
+          "Derik Wand Studio فضایی برای ساخت بازی‌ها، توسعهٔ وب و تجربه‌های دیجیتال است؛ جایی که طراحی و برنامه‌نویسی در کنار هم قرار می‌گیرند.",
+        explore: "مشاهدهٔ پروژه‌ها",
+        meetCreator: "آشنایی با سازنده",
+        independent: "استودیوی مستقل",
+        gameAndWeb: "بازی‌سازی و توسعهٔ وب",
+        statusValue: "مستقل",
+
+        gamesTitle: "بازی‌ها",
+        gamesIntro:
+          "از ایده‌پردازی تا طراحی مکانیک‌ها و پیاده‌سازی؛ بازی‌ها بخش مهمی از مسیر توسعه در DWS هستند.",
+        flagDesc:
+          "نبرد تیمی، جمع‌آوری منابع و ساخت‌وساز در یک میدان رقابتی با سبک هنری Low-poly.",
+        inDevelopment: "در حال توسعه",
+        kakaDesc: "یکی از بازی‌های اکشن ساخته‌شده در مجموعهٔ آثار استودیو.",
+        gameArchive: "آرشیو بازی‌ها",
+        otherGames: "بازی‌های دیگر",
+        otherGamesDesc: "ناقلا، انگور، BlastCastle و دیگر تجربه‌های بازی‌سازی.",
+        moreWorks: "دیگر آثار",
+
+        projectsTitle: "پروژه‌ها",
+        projectsIntro:
+          "نمونه‌هایی از پروژه‌های وب و نرم‌افزاری که با تمرکز بر کاربردپذیری، ساختار فنی و تجربهٔ کاربر توسعه یافته‌اند.",
+        royayeDesc:
+          "وب‌سایت آکادمی فوتبال با بخش‌های محتوایی، گالری و پنل مدیریت.",
+        khoshDesc:
+          "پروژه‌ای برای ایجاد حضور حرفه‌ای و معرفی خدمات در فضای آنلاین.",
+        nextTitle: "پروژهٔ بعدی",
+        nextDesc:
+          "ایده‌های تازه‌ای که در آینده به پروژه‌های قابل استفاده تبدیل خواهند شد.",
+        comingSoon: "به‌زودی",
+
+        studioTitle: "فناوری با نگاه خلاقانه.",
+        studioDescription:
+          "Derik Wand Studio یک استودیوی مستقل توسعه است که بازی‌سازی، برنامه‌نویسی و طراحی وب را دنبال می‌کند. هدف، ساخت محصولاتی است که علاوه بر ظاهر مناسب، ساختار فنی قابل اتکا و کاربرد مشخصی داشته باشند.",
+        studioDescription2:
+          "از نمونه‌های اولیهٔ بازی تا وب‌سایت‌های واقعی، هر پروژه فرصتی برای یادگیری، آزمایش و بهتر کردن فرایند ساخت محصول است.",
+        detailFocus: "حوزهٔ فعالیت",
+        detailFocusValue: "بازی و وب",
+        detailApproach: "رویکرد",
+        detailApproachValue: "طراحی و توسعه",
+        detailStructure: "ساختار",
+        detailStructureValue: "استودیوی مستقل",
+        detailTools: "فناوری‌ها",
+
+        creatorSectionTitle: "پشت این استودیو",
+        creatorSectionIntro:
+          "معرفی کوتاهی از فردی که ایده‌ها را به پروژه‌های واقعی تبدیل می‌کند.",
+        creatorEyebrow: "سازنده و توسعه‌دهنده",
+        creatorName: "پرهام دریکوند",
+        creatorRole: "برنامه‌نویس و توسعه‌دهندهٔ بازی",
+        creatorDescription:
+          "من پرهام دریکوند هستم؛ برنامه‌نویس و بازی‌ساز علاقه‌مند به ساخت بازی‌های دوبعدی و سه‌بعدی و توسعهٔ وب. Derik Wand Studio فضایی است برای تبدیل ایده‌ها به پروژه‌های عملی، یادگیری فناوری‌های جدید و ساخت تجربه‌های دیجیتال با هویت مستقل.",
+        creatorProfile: "مشاهدهٔ پروفایل",
+        viewWorks: "دیدن پروژه‌ها",
+
+        footerText: "ساخته‌شده برای ایده‌هایی که ارزش اجرا دارند.",
+        footerCreator: "پرهام دریکوند",
+
+        toastFlag:
+          "FLAG RUMBLE — اطلاعات بیشتر در نسخه‌های بعدی منتشر می‌شود.",
+        toastKaka:
+          "KakaShooter — اطلاعات تکمیلی به‌زودی اضافه می‌شود.",
+        toastOtherGames:
+          "بازی‌های استودیو: ناقلا، انگور، KakaShooter و BlastCastle.",
+        toastRoyaye:
+          "Royaye Aflak — نمونه‌کار توسعهٔ وب.",
+        toastKhosh:
+          "KhoshNamay — نمونه‌کار توسعهٔ وب.",
+        toastNext:
+          "جزئیات این پروژه در آینده منتشر خواهد شد."
+      },
+
+      en: {
+        navGames: "Games",
+        navProjects: "Projects",
+        navStudio: "Studio",
+        navCreator: "Creator",
+
+        heroEyebrow: "INDEPENDENT DEVELOPMENT STUDIO",
+        heroLine1: "Turn ideas",
+        heroLine2: "into reality.",
+        heroDescription:
+          "Derik Wand Studio is a space for game development, web engineering, and digital experiences where design and programming work together.",
+        explore: "Explore projects",
+        meetCreator: "Meet the creator",
+        independent: "Independent studio",
+        gameAndWeb: "Games and web development",
+        statusValue: "Independent",
+
+        gamesTitle: "Games",
+        gamesIntro:
+          "From early concepts to gameplay systems and implementation, games are an important part of DWS.",
+        flagDesc:
+          "Team battles, resource gathering, and crafting in a competitive low-poly arena.",
+        inDevelopment: "In development",
+        kakaDesc: "An action game from the studio's collection.",
+        gameArchive: "Game archive",
+        otherGames: "Other games",
+        otherGamesDesc:
+          "Naqola, Angoor, BlastCastle, and other game development projects.",
+        moreWorks: "More work",
+
+        projectsTitle: "Projects",
+        projectsIntro:
+          "Selected web and software projects built with attention to usability, technical structure, and user experience.",
+        royayeDesc:
+          "A football academy website with content, gallery, and administration features.",
+        khoshDesc:
+          "A web project designed to establish a professional online presence.",
+        nextTitle: "Next project",
+        nextDesc:
+          "New ideas that may become practical projects in the future.",
+        comingSoon: "Coming soon",
+
+        studioTitle: "Technology with a creative perspective.",
+        studioDescription:
+          "Derik Wand Studio is an independent development studio focused on game development, programming, and web design. The goal is to build products with a clear purpose and a reliable technical foundation.",
+        studioDescription2:
+          "From early game prototypes to real websites, every project is an opportunity to learn, experiment, and improve the development process.",
+        detailFocus: "Focus",
+        detailFocusValue: "Games and web",
+        detailApproach: "Approach",
+        detailApproachValue: "Design and development",
+        detailStructure: "Structure",
+        detailStructureValue: "Independent studio",
+        detailTools: "Technologies",
+
+        creatorSectionTitle: "Behind the studio",
+        creatorSectionIntro:
+          "A short introduction to the person turning ideas into real projects.",
+        creatorEyebrow: "CREATOR & DEVELOPER",
+        creatorName: "Parham Derikvand",
+        creatorRole: "Programmer and game developer",
+        creatorDescription:
+          "I'm Parham Derikvand, a programmer and game developer interested in 2D and 3D games and web development. Derik Wand Studio is a space for turning ideas into practical projects, learning new technologies, and building digital experiences with an independent identity.",
+        creatorProfile: "View profile",
+        viewWorks: "View projects",
+
+        footerText: "Built for ideas worth bringing to life.",
+        footerCreator: "Parham Derikvand",
+
+        toastFlag:
+          "FLAG RUMBLE — more information will be published in future releases.",
+        toastKaka:
+          "KakaShooter — more details coming soon.",
+        toastOtherGames:
+          "Studio games: Naqola, Angoor, KakaShooter, and BlastCastle.",
+        toastRoyaye:
+          "Royaye Aflak — web development project.",
+        toastKhosh:
+          "KhoshNamay — web development project.",
+        toastNext:
+          "Details about this project will be published in the future."
+      }
+    };
+
+    let language = "fa";
+    let toastTimer;
+
+    const toast = document.getElementById("toast");
+    const nav = document.getElementById("nav");
+    const menuBtn = document.getElementById("menuBtn");
+    const langBtn = document.getElementById("langBtn");
+
+    const projectMessages = {
+      flag: "toastFlag",
+      kaka: "toastKaka",
+      otherGames: "toastOtherGames",
+      royaye: "toastRoyaye",
+      khosh: "toastKhosh",
+      next: "toastNext"
+    };
+
+    function notify(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      window.clearTimeout(toastTimer);
+
+      toastTimer = window.setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    function setLanguage(nextLanguage) {
+      language = nextLanguage;
+
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
+
+      document.querySelectorAll("[data-t]").forEach((element) => {
+        const key = element.dataset.t;
+        const translatedText = translations[language][key];
+
+        if (translatedText !== undefined) {
+          element.textContent = translatedText;
+        }
+      });
+
+      langBtn.querySelector(".language-label").textContent =
+        language === "fa" ? "EN" : "FA";
+
+      langBtn.setAttribute(
+        "aria-label",
+        language === "fa" ? "Switch to English" : "تغییر زبان به فارسی"
+      );
+
+      document.title =
+        language === "fa"
+          ? "Derik Wand Studio | DWS"
+          : "Derik Wand Studio | DWS";
+    }
+
+    langBtn.addEventListener("click", () => {
+      setLanguage(language === "fa" ? "en" : "fa");
+    });
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.setAttribute(
+        "aria-label",
+        isOpen ? "Close menu" : "Open menu"
+      );
+
+      menuBtn.innerHTML = isOpen
+        ? '<svg aria-hidden="true"><use href="#icon-close"></use></svg>'
+        : '<svg aria-hidden="true"><use href="#icon-menu"></use></svg>';
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open menu");
+        menuBtn.innerHTML =
+          '<svg aria-hidden="true"><use href="#icon-menu"></use></svg>';
+      });
+    });
+
+    document.querySelectorAll("[data-project]").forEach((card) => {
+      const showProjectMessage = () => {
+        const project = card.dataset.project;
+        const messageKey = projectMessages[project];
+        const message = translations[language][messageKey];
+
+        if (message) {
+          notify(message);
+        }
+      };
+
+      card.addEventListener("click", showProjectMessage);
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showProjectMessage();
+        }
+      });
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    setLanguage("fa");
+  </script>
+</body>
+</html>
